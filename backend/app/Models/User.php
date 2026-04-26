@@ -9,8 +9,6 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 
 
-// #[Fillable(['first_name', 'last_name', 'phone', 'email', 'avatar_url', 'role',  'status'])]
-// #[Hidden(['password', 'remember_token'])]
 class User extends Authenticatable
 {
     use HasFactory, Notifiable, HasApiTokens;
@@ -38,4 +36,12 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    // Relation : un user peut avoir plusieurs adresses
+    public function addresses ()
+    {
+        return $this -> hasMany(user_addresses::class);
+    }
+
+
 }
