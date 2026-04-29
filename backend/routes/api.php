@@ -6,6 +6,8 @@ use App\Http\Controllers\Api\AuthController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\TestController;
 use App\Http\Controllers\Api\UserAddressController;
+use App\Http\Controllers\Api\CategoryController;
+
 
 Route::get('/test', [TestController::class, 'index']);
 
@@ -19,5 +21,6 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/addresses', [UserAddressController::class, 'store']);
     Route::get('/addresses', [UserAddressController::class, 'index']);
     Route::put('/addresses/{address}', [UserAddressController::class, 'update']);
-    Route::delete('/addresses/{address}',[UserAddressController::class, 'destroy']);
+    Route::delete('/addresses/{address}', [UserAddressController::class, 'destroy']);
+    Route::apiResource('categories', CategoryController::class);
 });
