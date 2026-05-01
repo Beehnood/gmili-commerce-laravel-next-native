@@ -22,5 +22,12 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/addresses', [UserAddressController::class, 'index']);
     Route::put('/addresses/{address}', [UserAddressController::class, 'update']);
     Route::delete('/addresses/{address}', [UserAddressController::class, 'destroy']);
-    Route::apiResource('categories', CategoryController::class);
+    Route::get('/categories', [CategoryController::class, 'index']);
+    Route::post('/categories', [CategoryController::class, 'store']);
+    Route::get('/categories/{category}', [CategoryController::class, 'show']);
+    Route::put('/categories/{category}', [CategoryController::class, 'update']);
+    Route::delete('/categories/{category}', [CategoryController::class, 'destroy']);
+});
+Route::middleware('auth:sanctum')->group(function () {
+    Route::apiResource('products', ProductController::class);
 });

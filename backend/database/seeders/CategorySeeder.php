@@ -9,6 +9,7 @@ class CategorySeeder extends Seeder
 {
     public function run(): void
     {
+        Category::query()->delete();
         // catégories principales
         $categories = Category::factory(5)->create();
 
