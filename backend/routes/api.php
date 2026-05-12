@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\TestController;
 use App\Http\Controllers\Api\UserAddressController;
 use App\Http\Controllers\Api\CategoryController;
+use App\Http\Controllers\Api\ProductImageController;
 
 
 Route::get('/test', [TestController::class, 'index']);
@@ -30,4 +31,5 @@ Route::middleware('auth:sanctum')->group(function () {
 });
 Route::middleware('auth:sanctum')->group(function () {
     Route::apiResource('products', ProductController::class);
+    Route::apiResource('product-images', ProductImageController::class);
 });
