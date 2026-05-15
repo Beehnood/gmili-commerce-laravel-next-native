@@ -8,6 +8,7 @@ use App\Http\Controllers\Api\TestController;
 use App\Http\Controllers\Api\UserAddressController;
 use App\Http\Controllers\Api\CategoryController;
 use App\Http\Controllers\Api\ProductImageController;
+use App\Http\Controllers\Api\ProductVariantController;
 
 
 Route::get('/test', [TestController::class, 'index']);
@@ -28,8 +29,17 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/categories/{category}', [CategoryController::class, 'show']);
     Route::put('/categories/{category}', [CategoryController::class, 'update']);
     Route::delete('/categories/{category}', [CategoryController::class, 'destroy']);
+
+    // cart
+    Route::get('/cart',[CartController::class, 'show']);
+    Route::post('/cart/items',[CartController::class, 'addItem']);
+    Route::put('/cart/items/{cartItem}', [CartController::class, 'updateItem']);
+    Route::delete('/cart/items/{cartItem}', [CartController::class, 'removeItem']);
+    Route::delete('/cart', [CartController::class, 'clear']);
 });
 Route::middleware('auth:sanctum')->group(function () {
     Route::apiResource('products', ProductController::class);
     Route::apiResource('product-images', ProductImageController::class);
+    Route::apiResource('product_variants', ProductVariantController::class);
+
 });

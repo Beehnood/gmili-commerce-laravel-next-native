@@ -20,7 +20,6 @@ class Product extends Model
         'is_active',
         'in_stock',
         'has_variants',
-
     ];
 
     // relation : un produit appartient à une catégorie
@@ -29,9 +28,15 @@ class Product extends Model
         return $this->belongsTo(Category::class);
     }
 
-    public function products()
+    // relation : un produit possède plusieurs variantes
+    public function variants()
     {
-        return $this->hasMany(Product::class);
+        return $this->hasMany(ProductVariant::class);
     }
 
+    // relation : un produit peut être dans plusieurs cart items
+    public function cartItems()
+    {
+        return $this->hasMany(CartItem::class);
+    }
 }

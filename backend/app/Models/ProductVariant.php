@@ -2,9 +2,8 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Laravel\Prompts\Concerns\HasInfo;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class ProductVariant extends Model
 {
@@ -23,8 +22,20 @@ class ProductVariant extends Model
         'in_stock',
     ];
 
+    protected $casts = [
+        'price' => 'decimal:2',
+        'is_active' => 'boolean',
+        'in_stock' => 'boolean',
+    ];
+
+    // A variant belongs to one product.
     public function product()
     {
         return $this->belongsTo(Product::class);
+    }
+
+    public function cartItems()
+    {
+        return $this->hasMany(CartItem::class);
     }
 }
