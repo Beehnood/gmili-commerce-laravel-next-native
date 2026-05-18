@@ -1,65 +1,156 @@
 import Image from "next/image";
+import { Container } from "@/components/layout/Container";
+
+const products = [
+  { name: "Créoles éclat", image: "/images/product-earrings.jpg" },
+  { name: "Bague fine", image: "/images/product-ring.jpg" },
+  { name: "Créoles diamant", image: "/images/product-hoops.jpg" },
+  { name: "Bracelet argent", image: "/images/product-bracelet.webp" },
+  { name: "Collier Angela", image: "/images/product-necklace.jpg" },
+  { name: "Jonc Saturne", image: "/images/product-bangle.jpg" },
+];
 
 export default function Home() {
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
+    <>
+      <section className="relative min-h-[64vh] overflow-hidden sm:min-h-[72vh] lg:min-h-[680px]">
         <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
+          src="/images/hero-jewelry.png"
+          alt="Bijoux Gmili en or et argent"
+          fill
           priority
+          className="object-cover"
+          sizes="100vw"
         />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
-    </div>
+        <div className="absolute inset-0 bg-black/35" />
+      </section>
+
+      <section className="bg-background py-10 sm:py-14 lg:py-16">
+        <Container className="space-y-10 lg:space-y-14">
+          <div className="grid items-center gap-8 lg:grid-cols-[1.25fr_1fr]">
+            <article className="relative min-h-[220px] overflow-hidden rounded-md sm:min-h-[280px]">
+              <Image
+                src="/images/story-hands.webp"
+                alt="Bracelet doré porté à la main"
+                fill
+                className="object-cover"
+                sizes="(min-width: 1024px) 58vw, 100vw"
+              />
+              <div className="absolute inset-0 bg-black/25" />
+              <div className="absolute bottom-8 left-7 max-w-sm">
+                <h1 className="text-2xl font-bold text-white sm:text-3xl">
+                  Bien plus qu&apos;un accessoire
+                </h1>
+                <a
+                  href="#nouveautes"
+                  className="mt-4 inline-flex rounded-sm bg-white px-5 py-2 text-xs font-bold text-black transition hover:bg-primary"
+                >
+                  Savoir plus
+                </a>
+              </div>
+            </article>
+
+            <h2 className="mx-auto max-w-md text-center font-sans text-2xl font-black leading-tight text-white sm:text-3xl">
+              Comment les bijoux transforment notre mentalité et révèlent notre
+              style
+            </h2>
+          </div>
+
+          <div className="grid items-center gap-8 lg:grid-cols-[0.65fr_1.35fr]">
+            <h2 className="mx-auto max-w-xs text-center font-sans text-2xl font-black leading-tight text-white">
+              Guide pour choisir la couleur de vos accessoires
+            </h2>
+
+            <article className="relative min-h-[230px] overflow-hidden rounded-md sm:min-h-[300px]">
+              <Image
+                src="/images/style-models.jpeg"
+                alt="Trois femmes portant des bijoux dorés"
+                fill
+                className="object-cover"
+                sizes="(min-width: 1024px) 62vw, 100vw"
+              />
+              <div className="absolute inset-0 bg-black/30" />
+              <div className="absolute bottom-8 left-7 max-w-md">
+                <h2 className="text-2xl font-bold text-white sm:text-3xl">
+                  Quel bijou pour quelle peau ?
+                </h2>
+                <a
+                  href="#contact"
+                  className="mt-4 inline-flex rounded-sm bg-white px-5 py-2 text-xs font-bold text-black transition hover:bg-primary"
+                >
+                  Savoir plus
+                </a>
+              </div>
+            </article>
+          </div>
+        </Container>
+      </section>
+
+      <section id="nouveautes" className="bg-background pb-14">
+        <Container>
+          <h2 className="mb-8 text-center text-3xl text-primary">
+            Les Nouveautés
+          </h2>
+
+          <div className="grid grid-cols-2 gap-7 md:grid-cols-3 lg:gap-10">
+            {products.map((product) => (
+              <article key={product.name} className="group">
+                <div className="relative aspect-square overflow-hidden rounded-md bg-black">
+                  <Image
+                    src={product.image}
+                    alt={product.name}
+                    fill
+                    className="object-cover transition duration-500 group-hover:scale-105"
+                    sizes="(min-width: 1024px) 28vw, 45vw"
+                  />
+                </div>
+                <div className="mt-2 text-xs leading-tight text-white">
+                  <p>Prix : 00€</p>
+                  <p>Nom d&apos;Article</p>
+                </div>
+              </article>
+            ))}
+          </div>
+        </Container>
+      </section>
+
+      <section
+        id="contact"
+        className="relative bg-cover bg-center px-5 py-16 sm:px-8"
+        style={{ backgroundImage: "url('/images/contact-texture.webp')" }}
+      >
+        <div className="absolute inset-0 bg-black/35" />
+        <form className="relative mx-auto max-w-4xl rounded-md bg-black px-8 py-8 text-primary shadow-2xl sm:px-16">
+          <h2 className="mb-8 text-center text-2xl">Contactez nous</h2>
+
+          <div className="grid gap-6 sm:grid-cols-2">
+            <label className="text-sm">
+              Prénom
+              <input className="mt-2 h-10 w-full rounded-md bg-zinc-200 px-3 text-black outline-none focus:ring-2 focus:ring-primary" />
+            </label>
+            <label className="text-sm">
+              Nom
+              <input className="mt-2 h-10 w-full rounded-md bg-zinc-200 px-3 text-black outline-none focus:ring-2 focus:ring-primary" />
+            </label>
+            <label className="text-sm">
+              Mail
+              <input
+                type="email"
+                className="mt-2 h-10 w-full rounded-md bg-zinc-200 px-3 text-black outline-none focus:ring-2 focus:ring-primary"
+              />
+            </label>
+            <label className="text-sm">
+              Téléphone ( optionnel )
+              <input className="mt-2 h-10 w-full rounded-md bg-zinc-200 px-3 text-black outline-none focus:ring-2 focus:ring-primary" />
+            </label>
+          </div>
+
+          <label className="mt-6 block text-sm">
+            Message
+            <textarea className="mt-2 min-h-36 w-full resize-none rounded-md bg-zinc-200 px-3 py-3 text-black outline-none focus:ring-2 focus:ring-primary" />
+          </label>
+        </form>
+      </section>
+    </>
   );
 }
