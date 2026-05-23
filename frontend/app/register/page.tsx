@@ -4,10 +4,6 @@ import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 
-import { LoginModal } from "@/components/auth/LoginModal";
-import { RegisterModal } from "@/components/auth/RegisterModal";
-import { useAuthStore } from "@/store/auth.store";
-
 const links = [
   { href: "/", label: "Home" },
   { href: "/qui-sommes-nous", label: "Qui sommes nous" },
@@ -16,16 +12,13 @@ const links = [
 ];
 
 export function Navbar() {
-  const {isAuthenticated, logout }= useAuthStore();
-
+  const isAuthenticated = false;
   const [isRegisterOpen, setIsRegisterOpen] = useState(false);
-  const [isLoginOpen, setIsLoginOpen] = useState(false);
 
   return (
     <>
-      <header className="absolute inset-x-0 left-0 right-0 top-0 z-50">
+      <header className="absolute inset-x-0 top-0 z-50">
         <nav className="mx-auto flex h-20 max-w-7xl items-center justify-between px-5 sm:px-8">
-          {/* LOGO */}
           <Link
             href="/"
             className="flex h-14 w-14 shrink-0 items-center justify-center bg-black/90 text-center shadow-lg ring-1 ring-primary/25"
@@ -39,7 +32,6 @@ export function Navbar() {
             </span>
           </Link>
 
-          {/* NAVIGATION */}
           <div className="hidden items-center gap-9 md:flex">
             {links.map((link) => (
               <Link
@@ -52,9 +44,7 @@ export function Navbar() {
             ))}
           </div>
 
-          {/* RIGHT SIDE */}
           <div className="flex items-center gap-4">
-            {/* SEARCH */}
             <button
               className="hidden h-9 w-9 items-center justify-center transition hover:scale-105 md:flex"
               aria-label="Rechercher"
@@ -64,14 +54,13 @@ export function Navbar() {
             </button>
 
             {!isAuthenticated ? (
-              <div className="flex items-center gap-3">
-                <button
-                  type="button"
-                  onClick={() => setIsLoginOpen(true)}
+              <div className="hidden items-center gap-4 md:flex">
+                <Link
+                  href="/login"
                   className="rounded-full bg-white px-4 py-2 text-sm text-black transition duration-300 hover:scale-105 hover:bg-black hover:text-white"
                 >
                   Se connecter
-                </button>
+                </Link>
 
                 <button
                   type="button"
@@ -83,7 +72,6 @@ export function Navbar() {
               </div>
             ) : (
               <>
-                {/* PROFILE */}
                 <Link
                   href="/profile"
                   className="hidden h-9 w-9 items-center justify-center transition hover:scale-105 md:flex"
@@ -97,7 +85,6 @@ export function Navbar() {
                   />
                 </Link>
 
-                {/* CART */}
                 <Link
                   href="/cart"
                   className="relative h-9 w-9 transition hover:scale-105"
@@ -109,47 +96,94 @@ export function Navbar() {
                     width={24}
                     height={24}
                   />
-
                   <span className="absolute -right-1 -top-1 flex h-4 w-4 items-center justify-center rounded-full bg-primary text-[10px] font-bold text-black">
                     0
                   </span>
                 </Link>
-
-                {/* {logout} */}
-               <button
-                 className="rounded-full bg-white px-4 py-2 text-sm text-black transition duration-300 hover:scale-105 hover:bg-black hover:text-white"
-                 type="button"
-                 onClick={() => void logout()}>
-                  Logout
-
-               </button>
               </>
             )}
 
-            {/* MOBILE MENU */}
             <button
               className="flex h-9 w-9 items-center justify-center md:hidden"
               aria-label="Menu"
               type="button"
             >
-              <Image
-                src="/icons/burger-menu.png"
-                alt=""
-                width={24}
-                height={24}
-              />
+              <Image src="/icons/burger-menu.png" alt="" width={24} height={24} />
             </button>
           </div>
         </nav>
       </header>
 
-      {/* MODALS */}
-      <RegisterModal
-        isOpen={isRegisterOpen}
-        onClose={() => setIsRegisterOpen(false)}
-      />
+      {isRegisterOpen && (
+        <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/70 px-4">
+          <div className="relative w-full max-w-md rounded-3xl border border-primary/20 bg-[#211F1A] p-8 shadow-2xl">
+            <button
+              type="button"
+              onClick={() => setIsRegisterOpen(false)}
+              className="absolute right-5 top-5 text-2xl text-primary transition hover:text-white"
+              aria-label="Fermer"
+            >
+              ×
+            </button>
 
-      <LoginModal isOpen={isLoginOpen} onClose={() => setIsLoginOpen(false)} />
+            <div className="mb-8 text-center">
+              <h1 className="text-4xl text-primary">Créer un compte</h1>
+              <p className="mt-3 text-sm text-foreground/70">
+                Inscrivez-vous pour accéder à votre profil, panier et commandes.
+              </p>
+            </div>
+
+            <form className="space-y-5">
+              <div>
+                <label className="mb-2 block text-sm text-primary">Nom</label>
+                <input
+                  type="text"
+                  placeholder="Votre nom"
+                  className="w-full rounded-full border border-primary/20 bg-transparent px-5 py-3 text-sm outline-none placeholder:text-foreground/40 focus:border-primary"
+                />
+              </div>
+
+              <div>
+                <label className="mb-2 block text-sm text-primary">Email</label>
+                <input
+                  type="email"
+                  placeholder="exemple@mail.com"
+                  className="w-full rounded-full border border-primary/20 bg-transparent px-5 py-3 text-sm outline-none placeholder:text-foreground/40 focus:border-primary"
+                />
+              </div>
+
+              <div>
+                <label className="mb-2 block text-sm text-primary">
+                  Mot de passe
+                </label>
+                <input
+                  type="password"
+                  placeholder="********"
+                  className="w-full rounded-full border border-primary/20 bg-transparent px-5 py-3 text-sm outline-none placeholder:text-foreground/40 focus:border-primary"
+                />
+              </div>
+
+              <div>
+                <label className="mb-2 block text-sm text-primary">
+                  Confirmer le mot de passe
+                </label>
+                <input
+                  type="password"
+                  placeholder="********"
+                  className="w-full rounded-full border border-primary/20 bg-transparent px-5 py-3 text-sm outline-none placeholder:text-foreground/40 focus:border-primary"
+                />
+              </div>
+
+              <button
+                type="submit"
+                className="w-full rounded-full bg-primary px-6 py-3 font-bold text-black transition hover:opacity-90"
+              >
+                S&apos;inscrire
+              </button>
+            </form>
+          </div>
+        </div>
+      )}
     </>
   );
 }
