@@ -19,9 +19,19 @@ type AuthStore = {
 
 export const useAuthStore = create<AuthStore>((set) => ({
   user: null,
-  token: typeof window !== "undefined" ? localStorage.getItem("token") : null,
+  token: null,
   isAuthenticated:
-    typeof window !== "undefined" ? !!localStorage.getItem("token") : false,
+    false,
+
+    loadToken: () => {
+      const token = localStorage.getItem("token");
+
+      set({
+        token,
+        isAuthenticated: !!token
+      });
+
+    },
 
   register: async (data) => {
     const response = await authService.register(data);
