@@ -12,13 +12,26 @@ export type LoginData = {
   email: string;
   password: string;
 };
+export type User = {
+  id : number;
+  first_name: string;
+  laste_name: string;
+  email: string;
+  avatar_url?: string|null;
+};
+export type AuthResponse = {
+  message: string;
+  user: User;
+  token: string;
+};
+
+
 
 export const authService = {
   register: async (data: RegisterData) => {
     const response = await api.post("/register", data);
     return response.data;
   },
-
   login: async (data: LoginData) => {
     const response = await api.post("/login", data);
     return response.data;

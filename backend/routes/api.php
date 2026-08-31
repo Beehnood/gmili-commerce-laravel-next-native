@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\GoogleAuthController;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\Api\AuthController;
@@ -26,6 +27,13 @@ Route::get('/test', [TestController::class, 'index']);
 
 Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);
+
+// =====================================================
+// GOOGLE
+// =====================================================
+
+Route::get('/auth/google/redirect', [GoogleAuthController::class, 'redirect']);
+Route::get('/auth/google/callback', [GoogleAuthController::class, 'callback']);
 
 
 // =====================================================
@@ -57,6 +65,23 @@ Route::get('/product-variants/{product_variant}', [
     ProductVariantController::class,
     'show'
 ]);
+
+
+
+Route::get(
+    '/auth/google/redirect',
+    [GoogleAuthController::class, 'redirect']
+);
+
+Route::get(
+    '/auth/google/callback',
+    [GoogleAuthController::class, 'callback']
+);
+
+Route::post(
+    '/auth/google/exchange',
+    [GoogleAuthController::class, 'exchange']
+);
 
 
 // =====================================================

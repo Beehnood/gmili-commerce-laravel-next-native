@@ -12,15 +12,26 @@ return new class extends Migration {
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
+
             $table->string('first_name');
             $table->string('last_name');
+
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
-            $table->string('password');
+
+            // Nullable car un utilisateur Google peut ne pas avoir
+            // de mot de passe local.
+            $table->string('password')->nullable();
+
             $table->string('phone')->nullable();
+
+            // Google OAuth
+            $table->string('google_id')->nullable()->unique();
             $table->string('avatar_url')->nullable();
+
             $table->string('role')->default('client');
             $table->string('status')->default('active');
+
             $table->rememberToken();
             $table->timestamps();
         });

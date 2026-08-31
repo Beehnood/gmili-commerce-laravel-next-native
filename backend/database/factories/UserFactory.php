@@ -31,6 +31,7 @@ class UserFactory extends Factory
             'email_verified_at' => now(),
             'password' => 'password', // Laravel va hasher automatiquement
             'phone' => $this->faker->phoneNumber(),
+            'google_id' => null,
             'avatar_url' => null,
             'role' => 'client',
             'status' => 'active',

@@ -8,26 +8,23 @@ type LoginModalProps = {
   onClose: () => void;
 };
 
+const handleGoogleLogin = () => {
+  window.location.href = `${process.env.Next_REPUBLIC_API_URL}/api/auth/google/redirect`;
+};
 
+export function LoginModal({ isOpen, onClose }: LoginModalProps) {
+  const { login } = useAuthStore();
 
-export function LoginModal({
-  isOpen,
-  onClose,
-}: LoginModalProps) {
-    const {login } = useAuthStore();
-
-    const [form, setForm] = useState({
-        email: "",
-        password: "",
-    });
-
+  const [form, setForm] = useState({
+    email: "",
+    password: "",
+  });
 
   if (!isOpen) return null;
 
   return (
     <div className="fixed inset-0 z-[200] flex items-center justify-center bg-black/70 px-4">
       <div className="relative w-full max-w-md rounded-3xl border border-primary/20 bg-[#211F1A] p-8 shadow-2xl">
-
         {/* CLOSE BUTTON */}
         <button
           type="button"
@@ -40,9 +37,7 @@ export function LoginModal({
 
         {/* HEADER */}
         <div className="mb-8 text-center">
-          <h1 className="text-4xl text-primary">
-            Se connecter
-          </h1>
+          <h1 className="text-4xl text-primary">Se connecter</h1>
 
           <p className="mt-3 text-sm text-foreground/70">
             Connectez-vous à votre compte Gmili.
@@ -50,24 +45,23 @@ export function LoginModal({
         </div>
 
         {/* FORM */}
-        <form className="space-y-5"
-            onSubmit={async (e) => {
-                e.preventDefault();
-                await login(form);
-                onClose();
-            }}>
-
+        <form
+          className="space-y-5"
+          onSubmit={async (e) => {
+            e.preventDefault();
+            await login(form);
+            onClose();
+          }}
+        >
           <div>
-            <label className="mb-2 block text-sm text-primary">
-              Email
-            </label>
+            <label className="mb-2 block text-sm text-primary">Email</label>
 
             <input
               type="email"
               placeholder="exemple@mail.com"
               className="w-full rounded-full border border-primary/20 bg-transparent px-5 py-3 text-sm outline-none placeholder:text-foreground/40 focus:border-primary"
               value={form.email}
-              onChange={(e) => setForm({ ...form, email: e.target.value})}
+              onChange={(e) => setForm({ ...form, email: e.target.value })}
             />
           </div>
 
@@ -81,7 +75,7 @@ export function LoginModal({
               placeholder="********"
               className="w-full rounded-full border border-primary/20 bg-transparent px-5 py-3 text-sm outline-none placeholder:text-foreground/40 focus:border-primary"
               value={form.password}
-              onChange={(e)=>setForm({ ...form, password: e.target.value})}
+              onChange={(e) => setForm({ ...form, password: e.target.value })}
             />
           </div>
 
@@ -91,6 +85,11 @@ export function LoginModal({
           >
             Se connecter
           </button>
+
+          <button type="button" onClick={handleGoogleLogin}>
+            Continuer avec Google
+          </button>
+          
         </form>
       </div>
     </div>
