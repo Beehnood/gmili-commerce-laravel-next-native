@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Str;
 use Laravel\Socialite\Facades\Socialite;
+use Laravel\Socialite\Two\GoogleProvider;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 
 class GoogleAuthController extends Controller
@@ -18,7 +19,7 @@ class GoogleAuthController extends Controller
      */
     public function redirect(): RedirectResponse
     {
-        return Socialite::driver('google')
+        return $this->googleProvider()
             ->stateless()
             ->redirect();
     }
@@ -29,7 +30,7 @@ class GoogleAuthController extends Controller
     public function callback(): JsonResponse|RedirectResponse
     {
         try {
-            $googleUser = Socialite::driver('google')
+            $googleUser = $this->googleProvider()
                 ->stateless()
                 ->user();
 
@@ -200,5 +201,16 @@ class GoogleAuthController extends Controller
             'user' => $user,
             'token' => $token,
         ]);
+    }
+
+    /**
+     * Retourner le provider OAuth2 Google avec son type concret.
+     */
+    private function googleProvider(): GoogleProvider
+    {
+        /** @var GoogleProvider $provider */
+        $provider = Socialite::driver('google');
+
+        return $provider;
     }
 }

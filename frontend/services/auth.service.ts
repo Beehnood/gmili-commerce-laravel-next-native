@@ -46,4 +46,12 @@ export const authService = {
     const response = await api.post("/logout");
     return response;
   },
+
+  exchangeGoogleCode: async (code: string) => {
+    const response = await api.post("/auth/google/exchange", {
+      code,
+    });
+
+    return response.data;
+  },
 };
