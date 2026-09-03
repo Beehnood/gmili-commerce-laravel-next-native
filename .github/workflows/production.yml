@@ -121,10 +121,10 @@ jobs:
             git pull origin main
 
             cd backend
-            composer install --no-dev --optimize-autoloader
-            php artisan migrate --force
+            composer install --no-dev --no-interaction --prefer-dist --optimize-autoloader
             php artisan optimize:clear
             php artisan config:cache
+            php artisan view:cache    
 
             cd ../frontend
             npm ci
