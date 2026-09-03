@@ -86,10 +86,14 @@ export function LoginModal({ isOpen, onClose }: LoginModalProps) {
             Se connecter
           </button>
 
-          <button type="button" onClick={handleGoogleLogin}>
+          <button
+            type="button"
+            onClick={handleGoogleLogin}
+            className="w-full flex items-center justify-center gap-3 border border-gray-300 rounded-md px-4 py-2 bg-white text-gray-700 hover:bg-gray-50 transition"
+          >
+            <span className="font-bold text-lg">G</span>
             Continuer avec Google
           </button>
-          
         </form>
       </div>
     </div>
