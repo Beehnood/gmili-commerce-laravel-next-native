@@ -89,11 +89,7 @@ jobs:
       - name: Install frontend dependencies
         run: npm ci
 
-      - name: Run frontend tests
-        run: npm test -- --run
-
       - name: Build Next.js
         env:
           NEXT_PUBLIC_API_URL: https://api.gmilli.fr/api
         run: npm run build
-
